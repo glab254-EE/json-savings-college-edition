@@ -20,7 +20,7 @@ public class SingletonMusicPlayer : MonoBehaviour
         }
         _instance = this;
         DontDestroyOnLoad(gameObject);
-        if (PlayerPrefs.HasKey("M_Volume")) CurrentVolume = PlayerPrefs.GetFloat("M_Volume");
+        CurrentVolume = PlayerPrefs.GetFloat("M_Volume",0.5f);
     }
     private void Update()
     {
@@ -37,6 +37,7 @@ public class SingletonMusicPlayer : MonoBehaviour
     private void OnApplicationQuit()
     {
         PlayerPrefs.SetFloat("M_Volume",CurrentVolume);
+        PlayerPrefs.Save();
     }
     internal void SetVolume(float newvolume){
         CurrentVolume = Mathf.Clamp01(newvolume);
