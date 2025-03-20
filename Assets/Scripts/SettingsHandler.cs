@@ -14,11 +14,10 @@ public class SettingsHandler : MonoBehaviour
         singletonMusicPlayer = FindAnyObjectByType<SingletonMusicPlayer>();
         } while (singletonMusicPlayer == null);
         slider.value = singletonMusicPlayer.Volume;
+        slider.onValueChanged.AddListener(OnValueChange);
     }
-    void Update()
+    void OnValueChange(float newvalue)
     {
-        if (slider.value != singletonMusicPlayer.Volume){
-            singletonMusicPlayer.SetVolume(slider.value);
-        }
+        singletonMusicPlayer.SetVolume(newvalue);
     }
 }
